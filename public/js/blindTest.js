@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Ecoute de la réponse
     document.addEventListener('reponseBlindTest', (e) => {
         let artistTrue = verifArtist(e.detail.transcript);
-        let songTrue = verifSong(e.detail.transcript);
+        let songTrue = verifTitle(e.detail.transcript);
         if(artistTrue && songTrue) {
             alert("bravo vous avez trouvé");
         }
@@ -16,9 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function verifArtist(response) {
-    return response.toLowerCase().includes(document.getElementById('artist').value.toLowerCase()); 
+    return response.toLowerCase().includes(document.getElementById('artist_song').value.toLowerCase()); 
 }
 
-function verifSong(response) {
-   return response.toLowerCase().includes(document.getElementById('song').value.toLowerCase()); 
+function verifTitle(response) {
+   return response.toLowerCase().includes(document.getElementById('title_song').value.toLowerCase()); 
 }

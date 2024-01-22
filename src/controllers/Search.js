@@ -13,6 +13,8 @@ exports.get = (req, res) => {
                     musics.push({
                         title: element.title,
                         preview: element.preview,
+                        artist_name: element.artist.name,
+                        artist_picture_medium: element.artist.name,
                         cover
                     });
                 })

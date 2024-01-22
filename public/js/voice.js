@@ -38,10 +38,12 @@ if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
     window.addEventListener('keyup', (event) => {
         if (event.code === 'Space') {
             event.preventDefault();
-            event.stopPropagation();
+            event.stopPropagation();            
             if (recognizing) {
-                recognition.stop();
-                recognizing = false;
+                setTimeout(() => {
+                    recognition.stop();
+                    recognizing = false;
+                },300);
             }
         }
     });
