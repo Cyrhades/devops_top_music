@@ -20,12 +20,12 @@ exports.get = (req, res) => {
                 })
             }
             Promise.all(promises).then(() => {
-                res.render('home', {keyword: req.query.keyword, musics});           
+                res.render('search', {keyword: req.query.keyword, musics});           
             })
         }).catch((result) => {
             console.log(result)
         });  
     } else {
-        res.render('home')
+        res.render('search')
     }
 } 

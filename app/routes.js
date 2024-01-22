@@ -1,6 +1,7 @@
+const home = require('../src/controllers/Home.js');
 const search = require('../src/controllers/Search.js');
 
 module.exports = (app) => {
-    app.get('/', search.get)
-    app.get('/test', (req,res) => res.render('test'))
+    app.get('/', home.get)
+    app.get('/search',  search.get)
 }
