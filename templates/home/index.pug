@@ -1,0 +1,27 @@
+doctype html
+html(lang="fr")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title TOP Music
+    body 
+        form(action="/" method="get")
+            p
+                input(type="search" name="keyword" value=keyword) 
+            p 
+                button(type="submit") Chercher 
+
+        #result
+
+        input(type="text" id="artist" value="Gilbert Montagné")
+        input(type="text" id="song" value="On va s'aimer")
+
+        if musics
+            for track in musics 
+                p #{track.title}
+                img(src=track.cover)
+                audio(controls)
+                    source(src=track.preview type="audio/mpeg")
+        
+        script(src="/js/blindTest.js")
+        script(src="/js/voice.js")
