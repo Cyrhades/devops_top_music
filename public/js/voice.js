@@ -43,7 +43,7 @@ if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
                 setTimeout(() => {
                     recognition.stop();
                     recognizing = false;
-                },300);
+                }, 300);
             }
         }
     });
