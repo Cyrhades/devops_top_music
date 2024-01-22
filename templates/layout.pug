@@ -9,13 +9,15 @@ html(lang="fr")
         nav.navbar.bg-body-tertiary
             .container
                 a.navbar-brand(href="/")
+                    img(src="/images/logo.png" alt="Logo" height="30")
+                    span &nbsp; 
                     img(src="/images/logo_text.png" alt="Logo" height="30")
                 ul.nav.nav-underline
                     li.nav-item
                         a.nav-link(aria-current="page" href="/" class=(app.route=="/"?"active":"")) Accueil
                     li.nav-item
-                        a.nav-link(href="/#" class=(app.route=="/inscription"?"active":"")) inscription
+                        a.nav-link(href="javascript:alert(`Créer la route /inscription`)" class=(app.route=="/inscription"?"active":"")) inscription
                     li.nav-item
-                        a.nav-link(href="/#" class=(app.route=="/connexion"?"active":"")) connexion
+                        a.nav-link(href="javascript:alert(`Créer la route /connexion`)" class=(app.route=="/connexion"?"active":"")) connexion
 
         block content
