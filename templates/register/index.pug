@@ -2,20 +2,23 @@ extends ../layout.pug
 
 block content 
     .container
-        h3 Inscription
-
-        form(action="/inscription" method="post")
-            .form-group 
-                label(for="firstname") Prénom
-                input(type="text" name="firstname" id="firstname")
-            .form-group 
-                label(for="lastname") Nom
-                input(type="text" name="lastname" id="lastname")
-            .form-group 
-                label(for="email") Email
-                input(type="email" name="email" id="email")
-            .form-group 
-                label(for="password") Mot de passe
-                input(type="password" name="password" id="password")
-                
-            button.btn.btn-primary(type="submit") S'inscrire
+        .row.justify-content-center
+            .col.col-4.mt-4
+                h3 Inscription
+                .card
+                    .card-body   
+                        form(action="/inscription" method="post")
+                            .input-group.mb-3
+                                span.input-group-text Prénom
+                                input.form-control(type="text" name="firstname" id="firstname"  placeholder="Votre prénom")
+                            .input-group.mb-3
+                                span.input-group-text Nom
+                                input.form-control(type="text" name="lastname" id="lastname"  placeholder="Votre nom")
+                            .input-group.mb-3
+                                span.input-group-text Email
+                                input.form-control(type="email" name="email" id="email"  placeholder="Votre adresse mail")
+                            .input-group.mb-3
+                                span.input-group-text Mot de passe
+                                input.form-control(type="password" name="password" id="password"  placeholder="Votre mot de passe")
+                            .text-center   
+                                button.btn.btn-primary(type="submit") S'inscrire
