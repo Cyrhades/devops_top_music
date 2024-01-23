@@ -40,7 +40,8 @@ app.use(express.urlencoded({extended: false}));
 //--------------------------------------------------------------------
 app.use((req,res,next) => {
     res.locals.app = {
-        route : req._parsedUrl.pathname
+        route : req._parsedUrl.pathname,
+        user: req.session.user || {}
     };
     next();
 });

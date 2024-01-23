@@ -1,4 +1,5 @@
 const userRepo = require('../repositories/users.js')
+const bcrypt = require('bcryptjs')
 
 exports.get = (req, res) => {
     res.render('register')
@@ -9,7 +10,7 @@ exports.post = (req, res) => {
     user.firstname = req.body.firstname;
     user.lastname = req.body.lastname;
     user.email = req.body.email;
-    user.password = req.body.password;
+    user.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
     user.save();
     
     req.flash('notify', `Votre compte a bien été créé !`)
