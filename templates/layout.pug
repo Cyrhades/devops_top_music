@@ -18,10 +18,23 @@ html(lang="fr")
                     li.nav-item
                         a.nav-link(aria-current="page" href="/" class=(app.route=="/"?"active":"")) Accueil
                     li.nav-item
-                        a.nav-link(href="javascript:alert(`Créer la route /inscription`)" class=(app.route=="/inscription"?"active":"")) inscription
+                        a.nav-link(href="/inscription" class=(app.route=="/inscription"?"active":"")) inscription
                     li.nav-item
                         a.nav-link(href="javascript:alert(`Créer la route /connexion`)" class=(app.route=="/connexion"?"active":"")) connexion
                     li.nav-item
                         a.nav-link(href="/search" class=(app.route=="/search"?"active":"")) Chercher une musique
-                    
+
+        - var messages = getMessages()
+
+        if messages.notify || messages.error
+            .container.mt-4
+                if messages.notify
+                    each msg in messages.notify
+                        .alert.alert-info= msg
+                if messages.error
+                    each msg in messages.error
+                        .alert.alert-danger= msg         
         block content
+
+
+        script(src=process.env.BROWSER_REFRESH_URL)

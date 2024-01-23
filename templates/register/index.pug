@@ -1,0 +1,21 @@
+extends ../layout.pug
+
+block content 
+    .container
+        h3 Inscription
+
+        form(action="/inscription" method="post")
+            .form-group 
+                label(for="firstname") Prénom
+                input(type="text" name="firstname" id="firstname")
+            .form-group 
+                label(for="lastname") Nom
+                input(type="text" name="lastname" id="lastname")
+            .form-group 
+                label(for="email") Email
+                input(type="email" name="email" id="email")
+            .form-group 
+                label(for="password") Mot de passe
+                input(type="password" name="password" id="password")
+                
+            button.btn.btn-primary(type="submit") S'inscrire
