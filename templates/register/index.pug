@@ -2,23 +2,27 @@ extends ../layout.pug
 
 block content 
     .container
-        .row.justify-content-center
-            .col.col-4.mt-4
+        .row.justify-content-center.mt-4
+            .col.col-5.mt-4
                 h3 Inscription
                 .card
                     .card-body   
                         form(action="/inscription" method="post")
                             .input-group.mb-3
-                                span.input-group-text Prénom
+                                span.input-group-text 
+                                    i.fa.fa-user
                                 input.form-control(type="text" name="firstname" id="firstname"  placeholder="Votre prénom")
                             .input-group.mb-3
-                                span.input-group-text Nom
+                                span.input-group-text 
+                                    i.fa.fa-user
                                 input.form-control(type="text" name="lastname" id="lastname"  placeholder="Votre nom")
                             .input-group.mb-3
-                                span.input-group-text Email
+                                span.input-group-text
+                                    i.fa.fa-envelope
                                 input.form-control(type="email" name="email" id="email"  placeholder="Votre adresse mail")
                             .input-group.mb-3
-                                span.input-group-text Mot de passe
+                                span.input-group-text 
+                                    i.fa.fa-lock
                                 input.form-control(type="password" name="password" id="password"  placeholder="Votre mot de passe")
                             .text-center   
                                 button.btn.btn-primary(type="submit") S'inscrire
