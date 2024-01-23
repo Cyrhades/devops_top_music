@@ -1,0 +1,11 @@
+.nav-underline .nav-link.active, .nav-underline .show>.nav-link {
+    font-weight: 600;
+    color: #D35088;
+    border-bottom-color: currentcolor;
+}
+.nav-underline .nav-link, .nav-underline .show>.nav-link {
+    color: #000;
+}
+.nav-underline .nav-link:hover, .nav-underline .show>.nav-link:hover {
+    border-bottom-color: currentcolor;
+}

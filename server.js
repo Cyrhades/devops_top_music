@@ -40,7 +40,7 @@ app.use(express.urlencoded({extended: false}));
 //--------------------------------------------------------------------
 app.use((req,res,next) => {
     res.locals.app = {
-        route : '/'
+        route : req._parsedUrl.pathname
     };
     next();
 });
