@@ -40,7 +40,18 @@ block content
                         ul#listMusic.with-overflow                        
                             for track in musics
                                 li 
-                                    a(href="javascript:;" data-cover=track.cover data-title=track.title data-artist=track.artist_name data-music=track.preview) #{track.title}
+                                    .row.mt-1
+                                        .col.col-10
+                                            a(href="javascript:;" data-cover=track.cover data-title=track.title data-artist=track.artist_name data-music=track.preview) #{track.title}
+                                        .col.col-2
+                                            form(method="post")                                            
+                                                input(type="hidden" name="id_rapid_api_deezer" value=track.id_rapid_api_deezer)
+                                                input(type="hidden" name="title" value=track.title)
+                                                input(type="hidden" name="artist_name" value=track.artist_name)
+                                                input(type="hidden" name="cover" value=track.cover)
+                                                input(type="hidden" name="preview" value=track.preview)
+                                                button.btn.btn-sm.btn-danger 
+                                                    i.fa.fa-save
                     </div>
     
     script(src="/js/blindTest.js")
