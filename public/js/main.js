@@ -19,8 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const audioElement = document.getElementById('listenTopMusic');
             audioElement.src = current.dataset.music;
             audioElement.play();
-
-
         })
     });
 })

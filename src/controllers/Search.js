@@ -10,17 +10,19 @@ exports.get = (req, res) => {
             let musics = [];
             let promises = [];   
             for(element of result.data) {                
-                promises[promises.length] = await topMusic.getCover(element.album).then(cover => {
+                promises[promises.length] = await topMusic.getCover(element.album).then(async cover => {
                     musics.push({
                         id_rapid_api_deezer: element.id,
                         title: element.title,
                         preview: element.preview,
                         artist_name: element.artist.name,
                         artist_picture_medium: element.artist.name,
-                        cover
+                        cover,
+                        exists: (await musicRepo.findOne({ id_rapid_api_deezer: element.id }) ? true : false)
                     });
                 })
             }
+            
             Promise.all(promises).then(() => {
                 res.render('search', {keyword: req.query.keyword, musics});           
             })
