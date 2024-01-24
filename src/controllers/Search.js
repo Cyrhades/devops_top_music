@@ -18,7 +18,7 @@ exports.get = (req, res) => {
                         artist_name: element.artist.name,
                         artist_picture_medium: element.artist.name,
                         cover,
-                        exists: (await musicRepo.findOne({ id_rapid_api_deezer: element.id }) ? true : false)
+                        exists: (await musicRepo.findOne({ id_rapid_api_deezer: element.id }) ? "true" : "false")
                     });
                 })
             }
@@ -43,6 +43,9 @@ exports.post = (req, res) => {
     music.preview = req.body.preview;
     music.save();
     
-    req.flash('notify', `La musique a bien été enregistrée !`)
-    res.redirect('/search?keyword='+req.query.keyword);
+    res.json({
+        id_rapid_api_deezer: ""+req.body.id_rapid_api_deezer,
+        status : "ok",
+        msg : `La musique a bien été enregistrée !`
+    });
 } 

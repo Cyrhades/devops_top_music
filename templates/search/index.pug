@@ -5,6 +5,7 @@ block stylesheet
 
 block content 
     .container
+        #message.row
         .row
             .col.col-12.col-lg-6.mt-4
                 form(action="/search" method="get")
@@ -15,47 +16,45 @@ block content
                         button(type="submit") Chercher 
 
             .col.col-12.col-lg-6.mt-4
-                input(type="hidden" id="artist_song" value="")
-                input(type="hidden" id="title_song" value="")
-
-                if musics
+                if musics           
                     <div id="amazingaudioplayer">
-                        <div class="amazingaudioplayer-image">
-                            <img id="cover" src="" style="width:100%;max-width:100%;vertical-align:middle;">
-                        </div>
-                        <div class="amazingaudioplayer-image-clear"></div>
-                        <div class="amazingaudioplayer-text">
-                            <div class="amazingaudioplayer-title"></div>
-                            <div class="amazingaudioplayer-info"><br></div>
-                        </div>
-                        <div class="amazingaudioplayer-text-clear"></div>
-                        <div class="amazingaudioplayer-bar">
-                            <div class="amazingaudioplayer-controls">
-                                audio#listenTopMusic.hide(controls)
+                        <div id="waitSong" class="hide">
+                            section 
+                                input(type="hidden" id="id_rapid_api_deezer")
+                                input(type="hidden" id="title")
+                                input(type="hidden" id="artist_name")
+                                input(type="hidden" id="cover")
+                                input(type="hidden" id="preview")
+                            <div class="amazingaudioplayer-image">
+                                <img class="amazingaudioplayer-cover" src="" style="width:100%;max-width:100%;vertical-align:middle;">
                             </div>
-                            <div class="amazingaudioplayer-bar-buttons-clear"></div>
+                            <div class="amazingaudioplayer-image-clear"></div>
+                            <div class="amazingaudioplayer-text">
+                                <div class="amazingaudioplayer-title"></div>
+                                <div class="amazingaudioplayer-info"><br></div>
+                            </div>
+                            .btn-action-save
+                                button#not-exists.btn.btn-sm.btn-danger.hide 
+                                    i.fa.fa-save
+                                button#exists.btn.btn-sm.btn-secondary.hide 
+                                    i.fa.fa-save
+
+                            <div class="amazingaudioplayer-text-clear"></div>
+                            <div class="amazingaudioplayer-bar">
+                                <div class="amazingaudioplayer-controls">
+                                    audio#listenTopMusic(controls)
+                                </div>
+                                <div class="amazingaudioplayer-bar-buttons-clear"></div>
+                            </div>
+                            <div class="amazingaudioplayer-bar-clear"></div>
                         </div>
-                        <div class="amazingaudioplayer-bar-clear"></div>
                         <hr>
                         ul#listMusic.with-overflow                        
                             for track in musics
-                                li 
-                                    .row.mt-1
-                                        .col.col-10
-                                            a(href="javascript:;" data-cover=track.cover data-title=track.title data-artist=track.artist_name data-music=track.preview) #{track.title}
-                                        .col.col-2
-                                            if track.exists == false
-                                                form(method="post")                                            
-                                                    input(type="hidden" name="id_rapid_api_deezer" value=track.id_rapid_api_deezer)
-                                                    input(type="hidden" name="title" value=track.title)
-                                                    input(type="hidden" name="artist_name" value=track.artist_name)
-                                                    input(type="hidden" name="cover" value=track.cover)
-                                                    input(type="hidden" name="preview" value=track.preview)
-                                                    button.btn.btn-sm.btn-danger 
-                                                        i.fa.fa-save
-                                            else 
-                                                button.btn.btn-sm.btn-secondary 
-                                                    i.fa.fa-save
+                                li
+                                    a(href="javascript:;" data-id=track.id_rapid_api_deezer data-cover=track.cover data-title=track.title data-artist=track.artist_name data-music=track.preview data-exists=track.exists) #{track.title}
+
+
                     </div>
     
     script(src="/js/blindTest.js")
