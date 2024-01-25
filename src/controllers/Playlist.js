@@ -17,7 +17,7 @@ exports.post = async (req, res) => {
 
         musicRepo.findOne({ id_rapid_api_deezer: req.body.id_rapid_api_deezer }).then((music) => {
             if(namePlaylist && music) {
-                playlistRepo.findOneAndUpdate({ name: namePlaylist }, { $push: { songs: music } }).then(() => {
+                playlistRepo.findOneAndUpdate({ name: namePlaylist }, { $addToSet: { songs: music } }).then(() => {
                     res.json({
                         status : "ok",
                         msg : `La musique a bien été ajouté à la playlist !`
