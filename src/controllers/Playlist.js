@@ -1,17 +1,17 @@
 const playlistRepo = require('../repositories/playlists.js');
 const musicRepo = require('../repositories/musics.js');
 
-exports.post = (req, res) => {
+exports.post = async (req, res) => {
 
     let namePlaylist = req.body.playlist || null;
     if(namePlaylist && namePlaylist != '') {
-        playlistRepo.findOne({ name: namePlaylist }).then((result) => {
+        await playlistRepo.findOne({ name: namePlaylist }).then(async (result) => {
             // On crée la playlist si elle n'existe pas déjà
             if(result == null) {
                 const playlist = new playlistRepo();
                 playlist.name = namePlaylist;
                 playlist.songs = [];
-                playlist.save();
+                await playlist.save();
             }
         })
 

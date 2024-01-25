@@ -59,6 +59,9 @@ function savingPlaylist() {
         if(response.status=='ok') {                
             document.querySelector('#message').innerHTML = `<div class="alert alert-success mt-2">${response.msg}</div>`;
             window.setTimeout(() => {  document.querySelector('#message').innerHTML =''; }, 3000)
+        } else if(response.status=='ko') { 
+            document.querySelector('#message').innerHTML = `<div class="alert alert-danger mt-2">${response.msg}</div>`;
+            window.setTimeout(() => {  document.querySelector('#message').innerHTML =''; }, 3000)
         }
     });
 }
