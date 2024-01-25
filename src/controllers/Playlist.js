@@ -32,6 +32,8 @@ exports.post = async (req, res) => {
                 res.json({ status : "ko", msg : `La musique n'existe pas dans notre BDD !` });
             }
         }).catch(() =>  res.json({ status : "ko", msg : `Une erreur inconnue est survenue, veuillez réessayer plus tard !` }))
+    } else {
+        res.json({ status : "ko", msg : `La playlist doit avoir un nom !` });
     }
 } 
 

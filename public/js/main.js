@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if(response.status=='ok') {                
                 // On crée le select avec les playlist
                 if (response.playlists && response.playlists.length > 0) {
-                    let options = `<option value="0">Sélectionnez une Playlist existante</option>`;
+                    let options = `<option value="">Sélectionnez une Playlist existante</option>`;
                     response.playlists.forEach(playlist => {
                         options += `<option value="${playlist.name}">${playlist.name}</option>`;
                     })
@@ -131,7 +131,7 @@ function choicePlaylist(e) {
         if(e.type == 'dblclick') { 
             document.querySelector('#newPlaylist').disabled = false;
             document.querySelector('#newPlaylist').focus();
-            document.querySelector('#choicePlaylist').value="0";
+            document.querySelector('#choicePlaylist').value="";
         }        
     }
 }
