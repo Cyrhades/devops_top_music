@@ -8,7 +8,7 @@ block content
         #message.row
         .row
             .col.col-12.col-lg-6.mt-4
-                form(action="/search" method="get")
+                form(action="/admin/search" method="get")
                     .input-group
                         span.input-group-text 
                             i.fa.fa-search
@@ -17,46 +17,61 @@ block content
 
             .col.col-12.col-lg-6.mt-4
                 if musics           
-                    <div id="amazingaudioplayer">
-                        <div id="waitSong" class="hide">
+                    #amazingaudioplayer
+                        #waitSong.hide
                             section 
                                 input(type="hidden" id="id_rapid_api_deezer")
                                 input(type="hidden" id="title")
                                 input(type="hidden" id="artist_name")
                                 input(type="hidden" id="cover")
                                 input(type="hidden" id="preview")
-                            <div class="amazingaudioplayer-image">
-                                <img class="amazingaudioplayer-cover" src="" style="width:100%;max-width:100%;vertical-align:middle;">
-                            </div>
-                            <div class="amazingaudioplayer-image-clear"></div>
-                            <div class="amazingaudioplayer-text">
-                                <div class="amazingaudioplayer-title"></div>
-                                <div class="amazingaudioplayer-info"><br></div>
-                            </div>
+                            .amazingaudioplayer-image
+                                img.amazingaudioplayer-cover(src="" style="width:100%;max-width:100%;vertical-align:middle;")
+                            
+                            .amazingaudioplayer-image-clear
+                            .amazingaudioplayer-text
+                                .amazingaudioplayer-title
+                                .amazingaudioplayer-info
+                                    br
                             .btn-action-save
                                 button#not-exists.btn.btn-sm.btn-danger.hide 
                                     i.fa.fa-save
                                 button#exists.btn.btn-sm.btn-secondary.hide 
                                     i.fa.fa-save
 
-                            <div class="amazingaudioplayer-text-clear"></div>
-                            <div class="amazingaudioplayer-bar">
-                                <div class="amazingaudioplayer-controls">
+                            .btn-action-favorite.hide 
+                                button.btn.btn-sm.btn-warning(data-bs-toggle="modal" data-bs-target="#addFavorite")
+                                    i.fa-regular.fa-star
+
+                            .amazingaudioplayer-text-clear
+                            .amazingaudioplayer-bar
+                                .amazingaudioplayer-controls
                                     audio#listenTopMusic(controls)
-                                </div>
-                                <div class="amazingaudioplayer-bar-buttons-clear"></div>
-                            </div>
-                            <div class="amazingaudioplayer-bar-clear"></div>
-                        </div>
-                        <hr>
+                                
+                                .amazingaudioplayer-bar-buttons-clear
+                            .amazingaudioplayer-bar-clear
+
+                        hr
                         ul#listMusic.with-overflow                        
                             for track in musics
                                 li
                                     a(href="javascript:;" data-id=track.id_rapid_api_deezer data-cover=track.cover data-title=track.title data-artist=track.artist_name data-music=track.preview data-exists=track.exists) #{track.title}
 
+                    //-- Ma modal pour les playlist
+                    #addFavorite.modal.fade(tabindex="-1" aria-labelledby="addFavoriteLabel" aria-hidden="true")
+                        .modal-dialog
+                            .modal-content
+                                .modal-header
+                                    h1#addFavoriteLabel.modal-title.fs-5 Ajout à une playlist
+                                    button.btn-close(type="button" data-bs-dismiss="modal" aria-label="Close")
+                                .modal-body                                    
+                                    h5 Créer une nouvelle playlist
+                                    .mb-3
+                                        input(type="text" class="form-control" id="newPlaylist" placeholder="Nom de la playlist")
+                                    #playlists
+                                .modal-footer
+                                    button#closeAddFavorite.btn.btn-secondaryn(type="button" data-bs-dismiss="modal") Close
+                                    button#savingPlaylist.btn.btn-primary(type="button") Sauvegarder
+       
 
-                    </div>
-    
-    script(src="/js/blindTest.js")
-    script(src="/js/voice.js")
     script(src="/js/main.js")

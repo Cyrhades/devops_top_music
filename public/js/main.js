@@ -21,9 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if(current.dataset.exists=='true') {
                 document.querySelector('#not-exists').classList.add('hide')
                 document.querySelector('#exists').classList.remove('hide')
+                document.querySelector('.btn-action-favorite').classList.remove('hide')
             } else {
                 document.querySelector('#exists').classList.add('hide')
                 document.querySelector('#not-exists').classList.remove('hide')
+                document.querySelector('.btn-action-favorite').classList.add('hide')
             }
             // Le son 
             const audioElement = document.getElementById('listenTopMusic');
@@ -32,8 +34,34 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     });
     document.querySelector('#not-exists').addEventListener('click', saveSong);
+
+    document.querySelector('#savingPlaylist').addEventListener('click', savingPlaylist);
 })
 
+function savingPlaylist() {
+    const formData = new FormData();
+    formData.append('id_rapid_api_deezer', document.querySelector("#id_rapid_api_deezer").value);
+    /* Il faut soit une option du select soit un contenu dans le champs newPlaylist */
+    if(document.querySelector('#newPlaylist') && document.querySelector('#newPlaylist').value.trim() != "") {
+        formData.append('playlist', document.querySelector('#newPlaylist').value.trim());
+    } else if (document.querySelector('#choicePlaylist') && document.querySelector('#choicePlaylist').value != "") {
+        formData.append('playlist', document.querySelector('#choicePlaylist').value.trim());
+    }
+    // On ferme la popup
+    document.querySelector('#closeAddFavorite').click();
+
+    fetch('/admin/playlist/add', { 
+            method: 'POST', 
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams([...formData.entries()])
+        }
+    ).then(response => response.json()).then(response => {
+        if(response.status=='ok') {                
+            document.querySelector('#message').innerHTML = `<div class="alert alert-success mt-2">${response.msg}</div>`;
+            window.setTimeout(() => {  document.querySelector('#message').innerHTML =''; }, 3000)
+        }
+    });
+}
 
 function saveSong() {
     const formData = new FormData();
@@ -43,7 +71,7 @@ function saveSong() {
     formData.append('cover', document.querySelector("#cover").value);
     formData.append('preview', document.querySelector("#preview").value);
     
-    fetch('/search', { 
+    fetch('/admin/search', { 
             method: 'POST', 
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: new URLSearchParams([...formData.entries()])
@@ -53,6 +81,7 @@ function saveSong() {
             document.querySelector(`[data-id="${response.id_rapid_api_deezer}"]`).dataset.exists = "true";
             document.querySelector('#not-exists').classList.add('hide')
             document.querySelector('#exists').classList.remove('hide')
+            document.querySelector('.btn-action-favorite').classList.remove('hide')
             document.querySelector('#message').innerHTML = `<div class="alert alert-success mt-2">${response.msg}</div>`;
             window.setTimeout(() => {  document.querySelector('#message').innerHTML =''; }, 3000)
         }
