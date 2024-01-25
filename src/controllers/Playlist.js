@@ -36,8 +36,10 @@ exports.post = async (req, res) => {
 } 
 
 exports.getList = (req, res) => {
-
     // Renvoyer la liste des playlist existantes
-    res.json({ status: 'ko', list : [] });
-   
+    playlistRepo.find({}, { _id:0, name: 1 }).then((playlists) => {
+        res.json({ status: 'ok', playlists}) 
+    }).catch(() => {
+        res.json({ status : "ko", msg : `Une erreur inconnue est survenue, veuillez réessayer plus tard !` });
+    });
 } 

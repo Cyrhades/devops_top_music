@@ -3,6 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector("#keyword").addEventListener('keydown', (e) => e.stopPropagation())
     document.querySelector("#keyword").addEventListener('keyup', (e) => e.stopPropagation())
 
+    // Ecouteur le champ name playlist
+    document.querySelector('#newPlaylist').addEventListener('keyup', choicePlaylist);
+    document.querySelector('#newPlaylist').addEventListener('dblclick', choicePlaylist);
+
     document.querySelectorAll('[data-music]').forEach((element) => {
         element.addEventListener('click', (event) => {        
             const current = event.currentTarget
@@ -36,6 +40,28 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#not-exists').addEventListener('click', saveSong);
 
     document.querySelector('#savingPlaylist').addEventListener('click', savingPlaylist);
+
+    // Liste de playlist à l'ouverture de la Modal
+    document.querySelector('#addFavorite').addEventListener('shown.bs.modal', () => {
+        fetch('/admin/playlist/list').then(response => response.json()).then(response => {
+            if(response.status=='ok') {                
+                // On crée le select avec les playlist
+                if (response.playlists && response.playlists.length > 0) {
+                    let options = `<option value="0">Sélectionnez une Playlist existante</option>`;
+                    response.playlists.forEach(playlist => {
+                        options += `<option value="${playlist.name}">${playlist.name}</option>`;
+                    })
+                    document.querySelector('#playlists').innerHTML =  `<hr><select class="form-control" id="choicePlaylist" placeholder="Nom de la playlist">${options}</select>`;
+                    // Ecouteur d'évenement sur le select
+                    document.querySelector('#choicePlaylist').addEventListener('change', choicePlaylist);
+                }
+            } else if(response.status=='ko') { 
+                document.querySelector('#message').innerHTML = `<div class="alert alert-danger mt-2">${response.msg}</div>`;
+                window.setTimeout(() => {  document.querySelector('#message').innerHTML =''; }, 3000)
+            }
+        });
+    })
+    
 })
 
 function savingPlaylist() {
@@ -89,4 +115,23 @@ function saveSong() {
             window.setTimeout(() => {  document.querySelector('#message').innerHTML =''; }, 3000)
         }
     });
+}
+
+function choicePlaylist(e) {
+    console.log(e)
+    // si on est sur le select
+    if(e.type == 'change') {
+        if(e.currentTarget.value != 0) {
+            document.querySelector('#newPlaylist').value = '';
+            document.querySelector('#newPlaylist').disabled = true;
+        }
+    } 
+    // sinon on est sur le champ newPlaylist
+    else  {
+        if(e.type == 'dblclick') { 
+            document.querySelector('#newPlaylist').disabled = false;
+            document.querySelector('#newPlaylist').focus();
+            document.querySelector('#choicePlaylist').value="0";
+        }        
+    }
 }

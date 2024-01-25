@@ -19,5 +19,6 @@ module.exports = (app) => {
     app.post('/admin/search',  search.post)
 
     app.post('/admin/playlist/add',  playlist.post)
+    app.get('/admin/playlist/list',  playlist.getList)
     
 }
