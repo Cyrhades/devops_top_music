@@ -93,3 +93,10 @@ ul { list-style: none; }
     float: right;
     margin-right: 10px;
 }
+.disabled {
+    background-color: #888;
+}
+input.disabled::placeholder {
+    opacity: 0.5;
+    color: #aaa;
+}

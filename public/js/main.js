@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Ecouteur le champ name playlist
     document.querySelector('#newPlaylist').addEventListener('keyup', choicePlaylist);
-    document.querySelector('#newPlaylist').addEventListener('dblclick', choicePlaylist);
 
     document.querySelectorAll('[data-music]').forEach((element) => {
         element.addEventListener('click', (event) => {        
@@ -124,12 +123,15 @@ function choicePlaylist(e) {
     if(e.type == 'change') {
         if(e.currentTarget.value != 0) {
             document.querySelector('#newPlaylist').value = '';
-            document.querySelector('#newPlaylist').disabled = true;
+            document.querySelector('#newPlaylist').readonly = "readonly";
+            document.querySelector('#newPlaylist').classList.add('disabled');
         }
     } 
     // sinon on est sur le champ newPlaylist
     else  {
-        document.querySelector('#newPlaylist').disabled = false;
+        document.querySelector('#newPlaylist').readonly = false;
+        
+        document.querySelector('#newPlaylist').classList.remove('disabled');
         document.querySelector('#choicePlaylist').value="";
         if(e.type == 'dblclick') { 
             document.querySelector('#newPlaylist').focus();
