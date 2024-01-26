@@ -18,5 +18,15 @@ block content
 
         #debugVoice
 
+       
+        #cardsBlindTest.d-flex.grid.gap-3(style="flex-wrap: wrap;")
+            each song in playlist.songs
+                .card.hide(style="width:10rem;")
+                    .card-body
+                        img.card-img-top(src=song.cover)
+                        strong.card-title #{song.title}
+                        p.card-text #{song.artist_name}
+
+
     script(src="/js/blindTest.js")
     script(src="/js/voice.js")

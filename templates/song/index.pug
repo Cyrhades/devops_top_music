@@ -16,7 +16,9 @@ block content
                         tr 
                             td #{song.title}
                             td #{song.artist_name}
-                            td #{song.preview}
+                            td
+                                audio(controls, style="height:20px;")
+                                    source(src=song.preview)
                             td(nowrap="nowrap")
                                 a.btn.btn-sm.btn-primary(href="/admin/song/edit/"+song._id) 
                                     i.fa.fa-edit

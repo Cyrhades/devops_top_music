@@ -30,7 +30,6 @@ app.use('/', (req, res, next) => {
     next();
 })
 
-
 app.use('/admin', (req,res,next) => { 
     if(req.session.user && req.session.user.connected && req.session.user.connected == true) {
         next();

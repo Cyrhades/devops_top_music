@@ -1,3 +1,4 @@
+.hide { display:none;}
 .nav-underline .nav-link.active, .nav-underline .show>.nav-link {
     font-weight: 600;
     color: #D35088;

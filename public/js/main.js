@@ -118,7 +118,6 @@ function saveSong() {
 }
 
 function choicePlaylist(e) {
-    console.log(e)
     // si on est sur le select
     if(e.type == 'change') {
         if(e.currentTarget.value != 0) {
