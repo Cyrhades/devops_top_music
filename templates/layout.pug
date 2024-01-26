@@ -20,8 +20,15 @@ html(lang="fr")
                     li.nav-item
                         a.nav-link(aria-current="page" href="/" class=(app.route=="/"?"active":"")) Accueil
                     if app.user && app.user.connected == true
-                        li.nav-item
-                            a.nav-link(href="/admin/search" class=(app.route=="/admin/search"?"active":"")) Chercher une musique
+                        li.nav-item.dropdown
+                            a.nav-link.dropdown-toggle(href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" class=(app.route.indexOf("/admin/")==0?"active":"")) Administration
+                            ul.dropdown-menu
+                                li
+                                    a.dropdown-item(href="/admin/search" class=(app.route=="/admin/search"?"active":"")) Chercher une musique
+                                li
+                                    a.dropdown-item(href="/admin/playlist" class=(app.route=="/admin/playlist"?"active":"")) Liste des playlists
+                                li
+                                    a.dropdown-item(href="/admin/song" class=(app.route=="/admin/song"?"active":"")) Liste des sons
                         li.nav-item
                             a.nav-link(href="/deconnexion") Déconnexion
                     else 

@@ -18,7 +18,7 @@ app.use(session({
 
 app.use(flash())
 
-app.use('/admin', (req, res, next) => {
+app.use('/', (req, res, next) => {
     if(process.env.APP_ENV == 'dev') {
         req.session.user = {
             firstname: 'Cyril',

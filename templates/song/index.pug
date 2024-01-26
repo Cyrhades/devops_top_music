@@ -1,0 +1,28 @@
+extends ../layout.pug
+
+block content 
+    .container
+        a.btn.btn-sm.btn-primary(href="/admin/search") rechercher un son
+        if songs 
+            table.table
+                thead 
+                    tr 
+                        th Titre
+                        th Artiste
+                        th Ecoute
+                        th(style="width:1%") 
+                tbody
+                    each song in songs 
+                        tr 
+                            td #{song.title}
+                            td #{song.artist_name}
+                            td #{song.preview}
+                            td(nowrap="nowrap")
+                                a.btn.btn-sm.btn-primary(href="/admin/song/edit/"+song._id) 
+                                    i.fa.fa-edit
+                                span &nbsp;    
+                                a.btn.btn-sm.btn-danger(href="/admin/song/delete/"+song._id) 
+                                    i.fa.fa-trash
+
+        else 
+            .alert.alert-info Aucun son pour le moment

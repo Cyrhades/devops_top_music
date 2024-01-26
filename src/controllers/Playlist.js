@@ -75,3 +75,32 @@ exports.delete = (req, res) => {
         res.redirect('/admin/playlist');
     });
 } 
+
+
+exports.edit = (req, res) => {
+    musicRepo.find().then((musics) => {
+        playlistRepo.findOne({_id: req.params.id}).then((playlist) => {
+            res.render('playlist/edit', {musics, playlist});
+        });
+    });
+} 
+
+exports.editAddSong = async (req, res) => {
+    if(req.body.songs && req.body.songs.length > 0) {
+        let songs = [];
+        for(song of req.body.songs) {
+            await musicRepo.findOne({ _id: song }).then((music) => {       
+                songs.push(music)         
+            });
+        }
+        playlistRepo.findOneAndUpdate({ _id: req.params.id }, { $set: { songs } }).then(() => {
+            req.flash( 'notify', `La musique a bien été ajouté à la playlist !`);
+            //res.redirect('/admin/playlist')
+            res.redirect('/admin/playlist/edit/'+req.params.id)
+        })
+    } else {
+        req.flash( 'error', `Une erreur inconnue est survenu !`);
+        //res.redirect('/admin/playlist')
+        res.redirect('/admin/playlist/edit/'+req.params.id)
+    }
+} 

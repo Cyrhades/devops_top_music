@@ -3,6 +3,8 @@ const search = require('../src/controllers/Search.js');
 const register = require('../src/controllers/Register.js');
 const auth = require('../src/controllers/Authenticate.js');
 const playlist = require('../src/controllers/Playlist.js');
+const song = require('../src/controllers/Song.js');
+
 
 module.exports = (app) => {
     app.get('/', home.get)
@@ -27,5 +29,10 @@ module.exports = (app) => {
     
     app.get('/admin/playlist/delete/:id', playlist.delete)
     
+    app.get('/admin/playlist/edit/:id', playlist.edit)
+    app.post('/admin/playlist/edit/:id', playlist.editAddSong)
 
+
+    app.get('/admin/song', song.get)
+    app.get('/admin/song/delete/:id', song.delete)
 }
