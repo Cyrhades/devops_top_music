@@ -7,18 +7,26 @@ block content
         if musics
             form(method="post")
                 table.table
-                    tbody(style="display: block;max-height:400px; overflow:auto")  
+                    thead 
+                        tr
+                            th 
+                            th(style="width:20%") Titre
+                            th Artiste
+                            th Ecoute
+                    tbody(style="display: table-caption;max-height:400px; overflow:auto")  
                         each music in musics
                             tr
-                                th 
-                                    if (playlist.songs.find((song) => song.id_rapid_api_deezer == music.id_rapid_api_deezer)!=undefined)
-                                        input(type="checkbox" name="songs" Value=music.id checked="checked")
-                                    else 
-                                        input(type="checkbox" name="songs" Value=music.id)
+                                td
+                                    .form-check.form-switch
+                                        if (playlist.songs.find((song) => song.id_rapid_api_deezer == music.id_rapid_api_deezer)!=undefined)
+                                            input.form-check-input(type="checkbox" name="songs" Value=music.id checked="checked")
+                                        else 
+                                            input.form-check-input(type="checkbox" name="songs" Value=music.id)
                                 td #{music.title}
                                 td #{music.artist_name}
-                                td(style="width:100%")
-                    tfoot 
-                        tr 
-                            td.text-center(colspan=3) 
-                                button.btn.btn-primary(type="submit") Enregistrer
+                                td  
+                                    audio(controls, style="height:20px;")
+                                        source(src=music.preview)
+
+                .text-center
+                    button.btn.btn-primary(type="submit") Enregistrer
