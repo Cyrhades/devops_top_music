@@ -17,9 +17,9 @@ exports.post = async (req, res) => {
         })
 
         if(typeof req.body.id_rapid_api_deezer != 'undefined') {
-            musicRepo.findOne({ id_rapid_api_deezer: req.body.id_rapid_api_deezer }).then((music) => {
+            await musicRepo.findOne({ id_rapid_api_deezer: req.body.id_rapid_api_deezer }).then(async (music) => {
                 if(namePlaylist) {
-                        playlistRepo.findOneAndUpdate({ name: namePlaylist }, { $addToSet: { songs: music } }).then(() => {
+                        await playlistRepo.findOneAndUpdate({ name: namePlaylist }, { $addToSet: { songs: music } }).then(() => {
                         success =  `La musique a bien été ajouté à la playlist !`;
                     }).catch(() => {
                         error = `Une erreur inconnue est survenue, veuillez réessayer plus tard !`;               
