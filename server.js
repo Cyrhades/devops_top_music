@@ -18,6 +18,26 @@ app.use(session({
 
 app.use(flash())
 
+app.use('/admin', (req, res, next) => {
+    if(process.env.APP_ENV == 'dev') {
+        req.session.user = {
+            firstname: 'Cyril',
+            lastname: 'LECOMTE',
+            email: 'cyrhades78@gmail.com',
+            connected: true
+        };
+    }
+    next();
+})
+
+
+app.use('/admin', (req,res,next) => { 
+    if(req.session.user && req.session.user.connected && req.session.user.connected == true) {
+        next();
+    } else {
+        res.status(401).render('errors/401')
+    }
+})
 //--------------------------------------------------------------------
 //      Mise en place du moteur de template
 //--------------------------------------------------------------------
@@ -44,8 +64,6 @@ app.use((req,res,next) => {
     };
     next();
 });
-
-
 
 //--------------------------------------------------------------------
 //      Chargement des routes

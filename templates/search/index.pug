@@ -6,6 +6,9 @@ block stylesheet
 block content 
     .container
         #message.row
+        .row.mt-4 
+            .col-3
+                a.btn.btn-primary(href="/admin/playlist") Gérer les playlists
         .row
             .col.col-12.col-lg-6.mt-4
                 form(action="/admin/search" method="get")

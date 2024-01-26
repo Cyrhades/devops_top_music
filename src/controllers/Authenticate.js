@@ -24,3 +24,9 @@ exports.post = (req, res) => {
         res.render('auth', {error: `L'identification a échoué`, email:req.body.email })        
     })
 }
+
+exports.deconnect = (req, res) => {
+    req.session.user = null;
+    req.flash('notify', `Vous êtes maintenant déconnecté`);
+    res.redirect('/')
+}

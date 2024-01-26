@@ -1,0 +1,18 @@
+extends ../layout.pug
+
+block content 
+    .container
+        .row.justify-content-center.mt-4
+            .col.col-5.mt-4
+                h3 Création d'une playlist
+                .card
+                    .card-body   
+                        if error 
+                            .alert.alert-danger #{error}         
+                        form(action="/admin/playlist/add/" method="post") 
+                            .input-group.mb-3
+                                span.input-group-text
+                                    i.fa.fa-music
+                                input.form-control(type="text" name="playlist" id="playlist" value=playlist placeholder="Nom de la playlist")
+                            .text-center   
+                                button.btn.btn-primary(type="submit") Créer

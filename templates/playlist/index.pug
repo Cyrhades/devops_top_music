@@ -1,0 +1,26 @@
+extends ../layout.pug
+
+block content 
+    .container
+        a.btn.btn-sm.btn-primary(href="/admin/playlist/add/") Créer une nouvelle playlist
+        if playlists 
+            table.table
+                thead 
+                    tr 
+                        th Nom playlist
+                        th Nombre de sons
+                        th(style="width:1%") 
+                tbody
+                    each playlist in playlists 
+                        tr 
+                            td #{playlist.name}
+                            td #{playlist.songs.length}
+                            td(nowrap="nowrap")
+                                a.btn.btn-sm.btn-primary(href="/admin/playlist/edit/"+playlist._id) 
+                                    i.fa.fa-edit
+                                span &nbsp;    
+                                a.btn.btn-sm.btn-danger(href="/admin/playlist/delete/"+playlist._id) 
+                                    i.fa.fa-trash
+
+        else 
+            .alert.alert-info Aucune playlist pour le moment
