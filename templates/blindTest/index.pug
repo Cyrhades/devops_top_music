@@ -1,6 +1,22 @@
 extends ../layout.pug
 
 block content 
+    .container
+        h1 La playlist #{playlist.name}
+        
+        input(type="hidden" id="artist_song") 
+        input(type="hidden" id="title_song") 
+   
+        if playlist.songs && playlist.songs.length > 0
+            script 
+                | let songs = !{JSON.stringify(playlist.songs)};
+
+
+        #countdown 
+
+        #result
+
+        #debugVoice
 
     script(src="/js/blindTest.js")
     script(src="/js/voice.js")

@@ -6,7 +6,7 @@ const playlist = require('../src/controllers/Playlist.js');
 
 module.exports = (app) => {
     app.get('/', home.get)
-   
+    app.get('/blindtest/:id', home.blindtest)
 
     app.get('/inscription', register.get)
     app.post('/inscription', register.post)

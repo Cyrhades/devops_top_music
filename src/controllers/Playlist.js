@@ -22,7 +22,7 @@ exports.post = async (req, res) => {
                         await playlistRepo.findOneAndUpdate({ name: namePlaylist }, { $addToSet: { songs: music } }).then(() => {
                         success =  `La musique a bien été ajouté à la playlist !`;
                     }).catch(() => {
-                        error = `Une erreur inconnue est survenue, veuillez réessayer plus tard !`;               
+                        error = `Une erreur inconnue est survenue, veuillez réessayer plus tard !`;
                     })
                 } else {
                     error = `La musique n'existe pas dans notre BDD !`;

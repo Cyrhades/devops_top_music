@@ -1,4 +1,4 @@
-const result = document.getElementById('result');
+const result = document.getElementById('debugVoice');
 
 // Vérifier si la reconnaissance vocale est disponible dans le navigateur
 if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
