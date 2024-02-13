@@ -35,4 +35,7 @@ module.exports = (app) => {
 
     app.get('/admin/song', song.get)
     app.get('/admin/song/delete/:id', song.delete)
+
+    app.get('/admin/song/edit/:id', song.getEdit)
+    app.post('/admin/song/edit/:id', song.postEdit)
 }

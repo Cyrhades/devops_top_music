@@ -18,6 +18,7 @@ app.use(session({
 
 app.use(flash())
 
+/*
 app.use('/', (req, res, next) => {
     if(process.env.APP_ENV == 'dev') {
         req.session.user = {
@@ -29,6 +30,7 @@ app.use('/', (req, res, next) => {
     }
     next();
 })
+*/
 
 app.use('/admin', (req,res,next) => { 
     if(req.session.user && req.session.user.connected && req.session.user.connected == true) {

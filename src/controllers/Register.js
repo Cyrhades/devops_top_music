@@ -21,8 +21,10 @@ exports.post = (req, res) => {
     user.lastname = req.body.lastname;
     user.email = req.body.email;
     user.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
-    user.save();
-    
-    req.flash('notify', `Votre compte a bien été créé !`)
-    res.redirect('/');
+    user.save().then(() => {
+        req.flash('notify', `Votre compte a bien été créé !`)
+        res.redirect('/');
+    }).catch(() => {
+        res.render('register', {'error' : `Ce compte existe déjà` })
+    });
 }

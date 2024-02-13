@@ -6,7 +6,9 @@ block content
             .col.col-5.mt-4
                 h3 Inscription
                 .card
-                    .card-body   
+                    .card-body 
+                        if error 
+                            .alert.alert-danger #{error}
                         form(action="/inscription" method="post")
                             .input-group.mb-3
                                 span.input-group-text 

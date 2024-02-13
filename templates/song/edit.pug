@@ -1,0 +1,51 @@
+extends ../layout.pug
+
+block content 
+    .container
+        h1 #{song.title} (#{song.artist_name})
+
+       
+        form(method="post")
+            strong Ecriture titre chanson accepté
+            .input-group.mb-3
+                span.input-group-text
+                    i.fa.fa-music
+                input.form-control(type="text" value=song.title disabled="disabled")
+            button#addAcceptedTitle.btn.btn-primary Ajouter  une écriture pour le titre
+            #zoneAcceptedTitle.mt-4
+                .input-group.mb-3
+                    span.input-group-text
+                        i.fa.fa-music
+                    input.form-control(type="text" name="title[]")
+            hr
+
+            strong Ecriture nom artiste accepté
+            .input-group.mb-3
+                span.input-group-text
+                    i.fa.fa-user 
+                input.form-control(type="text" value=song.artist_name disabled="disabled")
+            button#addAcceptedArtist.btn.btn-primary Ajouter une écriture pour l'artiste
+            #zoneAcceptedArtist.mt-4
+                .input-group.mb-3
+                    span.input-group-text
+                        i.fa.fa-user
+                    input.form-control(type="text" name="artist[]")
+            hr
+
+
+            .text-center
+                button.btn.btn-primary(type="submit") Enregistrer
+
+
+    template#tplAcceptedTitle
+        .input-group.mb-3
+            span.input-group-text
+                i.fa.fa-music
+            input.form-control(type="text" name="title[]")
+    
+    template#tplAcceptedArtist
+        .input-group.mb-3
+            span.input-group-text
+                i.fa.fa-user
+            input.form-control(type="text" name="artist[]")
+            
